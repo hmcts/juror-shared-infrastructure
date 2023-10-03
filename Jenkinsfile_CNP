@@ -3,6 +3,7 @@
 @Library("Infrastructure") _
 
 def product = "juror"
+def component = "infrastructure"
 def branchesToSync = ['demo']
 
 withInfraPipeline(product) {
