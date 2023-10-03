@@ -1,0 +1,11 @@
+#!groovy
+//noinspection GroovyUnusedAssignment
+@Library("Infrastructure") _
+
+def product = "juror"
+def branchesToSync = ['demo']
+
+withInfraPipeline(product) {
+      enableSlackNotifications('#darts-build-notices')
+      syncBranchesWithMaster(branchesToSync)
+}
