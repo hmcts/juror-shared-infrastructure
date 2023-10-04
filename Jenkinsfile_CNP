@@ -7,6 +7,6 @@ def component = "infrastructure"
 def branchesToSync = ['demo']
 
 withInfraPipeline(product) {
-      enableSlackNotifications('#darts-build-notices')
+      enableSlackNotifications('#juror-build-notices')
       syncBranchesWithMaster(branchesToSync)
 }
