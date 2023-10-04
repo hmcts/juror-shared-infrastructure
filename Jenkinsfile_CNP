@@ -8,5 +8,5 @@ def branchesToSync = ['demo']
 
 withInfraPipeline(product) {
       enableSlackNotifications('#juror-build-notices')
-      syncBranchesWithMaster(branchesToSync)
+      //syncBranchesWithMaster(branchesToSync)
 }
