@@ -3,9 +3,9 @@
 @Library("Infrastructure") _
 
 def product = "juror"
-def branchesToSync = ['demo']
+def branchesToSync = []
 
 withInfraPipeline(product) {
       enableSlackNotifications('#juror-build-notices')
-      //syncBranchesWithMaster(branchesToSync)
+      syncBranchesWithMaster(branchesToSync)
 }
