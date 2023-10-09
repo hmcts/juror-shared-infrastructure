@@ -1,4 +1,4 @@
-module "juror-vault" {
+module "juror_vault" {
   source                     = "git@github.com:hmcts/cnp-module-key-vault?ref=master"
   name                       = format("%s-%s", var.product, var.env)
   product                    = var.product
