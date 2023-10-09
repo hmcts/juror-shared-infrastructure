@@ -23,3 +23,12 @@ variable "jenkins_AAD_objectId" {
 variable "common_tags" {
   type = map(string)
 }
+
+# Variables with default values or values specified in an {env}.tfvars file
+
+variable "location" {
+  default = "UK South"
+}
+
+variable "hub" {
+}
