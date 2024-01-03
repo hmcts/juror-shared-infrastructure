@@ -5,7 +5,7 @@ module "application_insights" {
   product = var.product
   name    = "${var.product}"
 
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = azurerm_resource_group.juror_resource_group.name
 
   common_tags = var.common_tags
 }
