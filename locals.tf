@@ -22,4 +22,11 @@ locals {
       }
     }
   }
+  admin_group_map = {
+    "demo" = "DTS Juror Admin (env:demo)"
+    "ithc" = "DTS Juror Admin (env:ithc)"
+    "test" = "DTS Juror Admin (env:test)"
+    "stg"  = "DTS Juror Admin (env:staging)"
+    "prod" = "DTS Juror Admin (env:production)"
+  }  
 }
