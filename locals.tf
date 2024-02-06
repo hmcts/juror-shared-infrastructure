@@ -28,5 +28,32 @@ locals {
     "test" = "DTS Juror Admin (env:test)"
     "stg"  = "DTS Juror Admin (env:staging)"
     "prod" = "DTS Juror Admin (env:production)"
-  }  
+  }
+  #Non secret parameters used by applications via secrets (instead of env vars) 
+  bureau = {
+    jwtTTL = "8h"
+  }
+  public = {
+    jwtTTL = "8h"
+  }
+
+ //generated_secrets = {
+ //   type = set(string)
+ //   default = [
+ //     "bureau-jwtKey",
+ //     "public-jwtKey",
+ //     "fe-jwtNoAuthKey",
+ //     "bureau-sessionSecret",
+ //     "public-sessionSecret",
+ //     "pnc-secret",
+ //     "scheduler-api-secret",
+ //     "scheduler-exe-secret"
+ //   ]
+ // }
+  generated_secrets = {
+    type = set(string)
+    default = [
+      "Ian-test"
+    ]
+  }
 }
