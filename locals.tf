@@ -34,9 +34,7 @@ locals {
   //  "bureau-jwtTTL" = "8h",
   //  "public-jwtTTL" = "8h"
   //}
-  fixed_secrets = {
-    "Ian-val" = "8h"
-  }
+
  //generated_secrets = {
  //   type = set(string)
  //   default = [
@@ -51,9 +49,10 @@ locals {
  //   ]
  // }
   generated_secrets = {
-    "Ian-Test-none" = { secret_length = 32, store = false, store_64 = false },
-    "Ian-Test-normal-only" = { secret_length = 32, store = true, store_64 = false },
-    "Ian-Test-64-only" = { secret_length = 32, store = false, store_64 = true },
-    "Ian-Test-both" = { secret_length = 32, store = true, store_64 = true },
+    "Ian-Test-none" = { secret_length = 32 },    
+    "Ian-Test-normal-only" = { secret_length = 32, name1 = "Ian-Test-normal-only" },
+    "Ian-Test-64-only" = { secret_length = 32, name64 = "Ian-Test-64-only" },    
+    "Ian-Test-normal-both" = { secret_length = 32, name1 = "Ian-Test-normal-both", name2 = "Ian-Test-normal-both-Second" },
+    "Ian-Test-all" = { secret_length = 32, name1 = "Ian-Test-all", name2 = "Ian-Test-all-Second", name64 = "Ian-Test-all-64" }
   }
 }
