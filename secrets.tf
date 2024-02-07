@@ -26,7 +26,7 @@ resource "azurerm_key_vault_secret" "stored" {
     key => params
     if params.name != null
   }  
-  name         = each.name
+  name         = each.value.name.value
   value        = random_password.generated[each.key].result 
   key_vault_id = module.juror-vault.key_vault_id
 }
@@ -38,7 +38,7 @@ resource "azurerm_key_vault_secret" "stored2" {
     key => params
     if params.name2 != null
   }  
-  name         = each.name2
+  name         = each.value.name2.value
   value        = random_password.generated[each.key].result 
   key_vault_id = module.juror-vault.key_vault_id
 }
@@ -50,7 +50,7 @@ resource "azurerm_key_vault_secret" "stored64" {
     key => params
     if params.name64 != null
   }  
-  name         = each.name64
+  name         = each.value.name64.value
   value        = base64encode(random_password.generated[each.key].result) 
   key_vault_id = module.juror-vault.key_vault_id
 }
