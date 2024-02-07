@@ -23,10 +23,10 @@ resource "random_password" "generated" {
 resource "azurerm_key_vault_secret" "stored" {
   for_each     = {
     for key, params in local.generated_secrets:
-    key => params.name
+    key => params
     if params.name != null
   }  
-  name         = each.params.name
+  name         = each.value.name
   value        = random_password.generated[each.key].result 
   key_vault_id = module.juror-vault.key_vault_id
 }
@@ -35,10 +35,10 @@ resource "azurerm_key_vault_secret" "stored" {
 resource "azurerm_key_vault_secret" "stored2" {
   for_each     = {
     for key, params in local.generated_secrets:
-    key => params.name2
+    key => params
     if params.name2 != null
   }  
-  name         = each.params.name2
+  name         = each.value.name2
   value        = random_password.generated[each.key].result 
   key_vault_id = module.juror-vault.key_vault_id
 }
@@ -47,10 +47,10 @@ resource "azurerm_key_vault_secret" "stored2" {
 resource "azurerm_key_vault_secret" "stored64" {
   for_each     = {
     for key, params in local.generated_secrets:
-    key => params.name64
+    key => params
     if params.name64 != null
   }  
-  name         = each.params.name64
+  name         = each.value.name64
   value        = base64encode(random_password.generated[each.key].result) 
   key_vault_id = module.juror-vault.key_vault_id
 }
