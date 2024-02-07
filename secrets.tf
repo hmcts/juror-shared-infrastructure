@@ -30,7 +30,11 @@ resource "azurerm_key_vault_secret" "stored" {
 
 #Now create base64 encoded version of secrets and store if store_64 parameter is true
 resource "azurerm_key_vault_secret" "encoded" {
-  for_each     = local.generated_secrets
+  for_each     = {
+    for key, params in local.generated_secrets:
+    key => params.store_64
+    if params.store_64  == true
+  }  
   name         = "${each.key}-encoded"  
   value        = base64encode(random_password.generated[each.key].result) 
   key_vault_id = module.juror-vault.key_vault_id
