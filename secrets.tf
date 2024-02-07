@@ -19,9 +19,9 @@ resource "random_password" "generated" {
 #Store secret if store parameter is true
 resource "azurerm_key_vault_secret" "stored" {
   for_each     = {
-    for key, value in local.generated_secrets:
-    key => value.store
-    if key != false
+    for key, params in local.generated_secrets:
+    key => params.store
+    if params.store  == true
   }  
   name         = each.key
   value        = random_password.generated[each.value].result 
