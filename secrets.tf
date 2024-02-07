@@ -24,7 +24,7 @@ resource "azurerm_key_vault_secret" "stored" {
     if params.store  == true
   }  
   name         = each.key
-  value        = random_password.generated[each.value].result 
+  value        = random_password.generated[each.key].result 
   key_vault_id = module.juror-vault.key_vault_id
 }
 
@@ -32,6 +32,6 @@ resource "azurerm_key_vault_secret" "stored" {
 resource "azurerm_key_vault_secret" "encoded" {
   for_each     = local.generated_secrets
   name         = "${each.key}-encoded"  
-  value        = base64encode(random_password.generated[each.value].result) 
+  value        = base64encode(random_password.generated[each.key].result) 
   key_vault_id = module.juror-vault.key_vault_id
 }
