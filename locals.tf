@@ -29,31 +29,31 @@ locals {
     "stg"  = "DTS Juror Admin (env:staging)"
     "prod" = "DTS Juror Admin (env:production)"
   }
+  fixed_secrets = {}
   #Non secret parameters used by applications via secrets (instead of env vars) 
   //fixed_secrets = {
   //  "bureau-jwtTTL" = "8h",
   //  "public-jwtTTL" = "8h"
   //}
-  fixed_secrets = {
-    "Ian-val" = "8h"
-  }
- //generated_secrets = {
- //   type = set(string)
- //   default = [
- //     "bureau-jwtKey",
- //     "public-jwtKey",
- //     "fe-jwtNoAuthKey",
- //     "bureau-sessionSecret",
- //     "public-sessionSecret",
- //     "pnc-secret",
- //     "scheduler-api-secret",
- //     "scheduler-exe-secret"
- //   ]
- // }
+
+  //generated_secrets = {
+  //   type = set(string)
+  //   default = [
+  //     "bureau-jwtKey",
+  //     "public-jwtKey",
+  //     "fe-jwtNoAuthKey",
+  //     "bureau-sessionSecret",
+  //     "public-sessionSecret",
+  //     "pnc-secret",
+  //     "scheduler-api-secret",
+  //     "scheduler-exe-secret"
+  //   ]
+  // }
   generated_secrets = {
-    "Ian-Test-none" = { secret_length = 32, store = false, store_64 = false },
-    "Ian-Test-normal-only" = { secret_length = 32, store = true, store_64 = false },
-    "Ian-Test-64-only" = { secret_length = 32, store = false, store_64 = true },
-    "Ian-Test-both" = { secret_length = 32, store = true, store_64 = true },
+    "Ian-Test-none" = { secret_length = 32, name = null, name2 = null, name64 = null },    
+    "Ian-Test-normal-only" = { secret_length = 32, name = "Ian-Test-normal-only", name2 = null, name64 = null },
+    "Ian-Test-64-only" = { secret_length = 32, name = null, name2 = null, name64 = "Ian-Test-64-only" },    
+    "Ian-Test-normal-both" = { secret_length = 32, name = "Ian-Test-normal-both", name2 = "Ian-Test-normal-both-Second", name64 = null },
+    "Ian-Test-all" = { secret_length = 32, name = "Ian-Test-all", name2 = "Ian-Test-all-Second", name64 = "Ian-Test-all-64" }
   }
 }
