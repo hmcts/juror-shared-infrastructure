@@ -50,7 +50,7 @@ locals {
   //   ]
   // }
   generated_secrets = {
-    "Ian-Test-none" = { secret_length = 32 },    
+    "Ian-Test-none" = { secret_length = 32, name = null, name2 = null, name64 = null },    
     "Ian-Test-normal-only" = { secret_length = 32, name = "Ian-Test-normal-only", name2 = null, name64 = null },
     "Ian-Test-64-only" = { secret_length = 32, name = null, name2 = null, name64 = "Ian-Test-64-only" },    
     "Ian-Test-normal-both" = { secret_length = 32, name = "Ian-Test-normal-both", name2 = "Ian-Test-normal-both-Second", name64 = null },
