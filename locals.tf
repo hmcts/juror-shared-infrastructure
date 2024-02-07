@@ -30,13 +30,13 @@ locals {
     "prod" = "DTS Juror Admin (env:production)"
   }
   #Non secret parameters used by applications via secrets (instead of env vars) 
-  bureau = {
-    jwtTTL = "8h"
+  //fixed_secrets = {
+  //  "bureau-jwtTTL" = "8h",
+  //  "public-jwtTTL" = "8h"
+  //}
+  fixed_secrets = {
+    "Ian-val" = "8h"
   }
-  public = {
-    jwtTTL = "8h"
-  }
-
  //generated_secrets = {
  //   type = set(string)
  //   default = [
@@ -51,9 +51,9 @@ locals {
  //   ]
  // }
   generated_secrets = {
-    type = set(string)
-    default = [
-      "Ian-test"
-    ]
+    "Ian-Test-none" = { secret_length = 32, store = false, store_64 = false },
+    "Ian-Test-normal-only" = { secret_length = 32, store = true, store_64 = false },
+    "Ian-Test-64-only" = { secret_length = 32, store = false, store_64 = true },
+    "Ian-Test-both" = { secret_length = 32, store = true, store_64 = true },
   }
 }
