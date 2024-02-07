@@ -35,19 +35,19 @@ locals {
   //  "public-jwtTTL" = "8h"
   //}
 
- //generated_secrets = {
- //   type = set(string)
- //   default = [
- //     "bureau-jwtKey",
- //     "public-jwtKey",
- //     "fe-jwtNoAuthKey",
- //     "bureau-sessionSecret",
- //     "public-sessionSecret",
- //     "pnc-secret",
- //     "scheduler-api-secret",
- //     "scheduler-exe-secret"
- //   ]
- // }
+  //generated_secrets = {
+  //   type = set(string)
+  //   default = [
+  //     "bureau-jwtKey",
+  //     "public-jwtKey",
+  //     "fe-jwtNoAuthKey",
+  //     "bureau-sessionSecret",
+  //     "public-sessionSecret",
+  //     "pnc-secret",
+  //     "scheduler-api-secret",
+  //     "scheduler-exe-secret"
+  //   ]
+  // }
   generated_secrets = {
     "Ian-Test-none" = { secret_length = 32 },    
     "Ian-Test-normal-only" = { secret_length = 32, name1 = "Ian-Test-normal-only" },
