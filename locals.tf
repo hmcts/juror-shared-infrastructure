@@ -64,6 +64,10 @@ locals {
     "jwtNoAuthKey"         = { secret_length = 32, name = "bureau-jwtNoAuthKey", name2 = "public-jwtNoAuthKey", name64 = "api-JWT-SECRET-HMAC" },
 
     "bureau-sessionSecret" = { secret_length = 32, name = "bureau-sessionSecret", name2 = null, name64 = null },
-    "public-sessionSecret" = { secret_length = 32, name = "public-sessionSecret", name2 = null, name64 = null }
+    "public-sessionSecret" = { secret_length = 32, name = "public-sessionSecret", name2 = null, name64 = null },
+
+    "pnc-secret"           = { secret_length = 32, name = null, name2 = null, name64 = "pnc-SECRET"},
+    "scheduler-api-secret" = { secret_length = 32, name = null, name2 = null, name64 = "scheduler-api-SECRET"},
+    "scheduler-execution"  = { secret_length = 32, name = null, name2 = null, name64 = "job-SERVICE-SECRET"}
   }
 }
