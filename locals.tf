@@ -70,4 +70,6 @@ locals {
     "scheduler-api-secret" = { secret_length = 32, name = null, name2 = null, name64 = "scheduler-api-SECRET" },
     "scheduler-execution"  = { secret_length = 32, name = null, name2 = null, name64 = "scheduler-execution-SECRET" }
   }
+
+  virtual_machines = {}
 }
