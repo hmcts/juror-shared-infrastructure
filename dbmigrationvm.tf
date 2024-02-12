@@ -37,6 +37,11 @@ module "virtual_machine" {
   systemassigned_identity = true
   os_disk_size_gb         = 500
 
+  install_azure_monitor      = true
+  install_dynatrace_oneagent = true
+  install_splunk_uf          = true
+  nessus_install             = true
+  
   custom_script_extension_name = "HMCTSVMBootstrap"
   tags                         = var.common_tags
 }
