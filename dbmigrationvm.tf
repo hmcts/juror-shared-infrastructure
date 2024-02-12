@@ -10,7 +10,7 @@ resource "random_password" "admin" {
   special      = false
 }
 
-module "virtual-machine" {
+module "virtual_machine" {
   providers = {
     azurerm     = azurerm
     azurerm.cnp = azurerm.cnp
