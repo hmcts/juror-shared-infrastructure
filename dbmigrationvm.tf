@@ -21,7 +21,7 @@ module "virtual-machine" {
   count                   = var.env == "prod" || var.env == "stg" ? 1 : 0
   vm_type                 = "linux"
   vm_name                 = "juror-db-migration-${env}-vm01"
-  env                     = var.env == "stg" ? "nonprod" : var.env
+  env                     = var.env
   vm_resource_group       = azurerm_resource_group.juror_resource_group.name
   vm_location             = var.location
   vm_admin_name           = "juror-admin"
@@ -42,7 +42,8 @@ module "virtual-machine" {
 }
 
 #Store admin password in keyvault
-resource "azurerm_key_vault_secret" "vm_password" {
+resource "azurerm_key_vault_secret" "migration_vm_password" {
+  count        = var.env == "prod" || var.env == "stg" ? 1 : 0
   name         = "migration-vm-password"
   value        = random_password.admin.result
   key_vault_id = module.juror-vault.key_vault_id
