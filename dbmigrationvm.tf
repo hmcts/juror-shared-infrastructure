@@ -57,7 +57,7 @@ resource "azurerm_key_vault_secret" "migration_vm_password" {
 resource "azurerm_virtual_machine_extension" "AADSSHLoginForLinux" {
   count                      = var.env == "prod" || var.env == "stg" ? 1 : 0
   name                       = "AADSSHLoginForLinux"
-  virtual_machine_id         = module.virtual_machine.vm_id
+  virtual_machine_id         = module.virtual_machine[0].vm_id
   publisher                  = "Microsoft.Azure.ActiveDirectory"
   type                       = "AADSSHLoginForLinux"
   type_handler_version       = "1.0"
@@ -68,7 +68,7 @@ resource "azurerm_virtual_machine_extension" "AADSSHLoginForLinux" {
 resource "azurerm_virtual_machine_extension" "install_docker" {
   count                      = var.env == "prod" || var.env == "stg" ? 1 : 0
   name                       = "InstallDocker"
-  virtual_machine_id         = module.virtual_machine.vm_id
+  virtual_machine_id         = module.virtual_machine[0].vm_id
   publisher                  = "Microsoft.CPlat.Core"
   type                       = "RunCommandLinux"
   type_handler_version       = "1.0"
