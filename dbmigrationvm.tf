@@ -20,7 +20,7 @@ module "virtual_machine" {
   source                  = "git@github.com:hmcts/terraform-module-virtual-machine.git?ref=master"
   count                   = var.env == "prod" || var.env == "stg" ? 1 : 0
   vm_type                 = "linux"
-  vm_name                 = "juror-db-migration-${env}-vm01"
+  vm_name                 = "juror-db-migration-${var.env}-vm01"
   env                     = var.env
   vm_resource_group       = azurerm_resource_group.juror_resource_group.name
   vm_location             = var.location
@@ -57,7 +57,7 @@ resource "azurerm_key_vault_secret" "migration_vm_password" {
 resource "azurerm_virtual_machine_extension" "AADSSHLoginForLinux" {
   count                      = var.env == "prod" || var.env == "stg" ? 1 : 0
   name                       = "AADSSHLoginForLinux"
-  virtual_machine_id         = module.virtual-machines.vm_id
+  virtual_machine_id         = module.virtual_machines.vm_id
   publisher                  = "Microsoft.Azure.ActiveDirectory"
   type                       = "AADSSHLoginForLinux"
   type_handler_version       = "1.0"
@@ -68,7 +68,7 @@ resource "azurerm_virtual_machine_extension" "AADSSHLoginForLinux" {
 resource "azurerm_virtual_machine_extension" "install_docker" {
   count                      = var.env == "prod" || var.env == "stg" ? 1 : 0
   name                       = "InstallDocker"
-  virtual_machine_id         = module.virtual-machines.vm_id
+  virtual_machine_id         = module.virtual_machines.vm_id
   publisher                  = "Microsoft.CPlat.Core"
   type                       = "RunCommandLinux"
   type_handler_version       = "1.0"
