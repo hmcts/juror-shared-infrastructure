@@ -17,7 +17,7 @@ module "virtual_machine" {
     azurerm.soc = azurerm.soc
   }
 
-  source                  = "github.com/hmcts/terraform-module-virtual-machine.git?ref=master"
+  source                  = "git@github.com:hmcts/terraform-module-virtual-machine.git?ref=master"
   count                   = var.env == "prod" || var.env == "stg" ? 1 : 0
   vm_type                 = "linux"
   vm_name                 = "juror-db-migration-${env}-vm01"
@@ -41,7 +41,7 @@ module "virtual_machine" {
   install_dynatrace_oneagent = true
   install_splunk_uf          = true
   nessus_install             = true
-  
+
   custom_script_extension_name = "HMCTSVMBootstrap"
   tags                         = var.common_tags
 }
