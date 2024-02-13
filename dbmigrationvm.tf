@@ -51,7 +51,7 @@ module "virtual_machine" {
 resource "azurerm_key_vault_secret" "migration_vm_password" {
   count        = var.env == "prod" || var.env == "stg" ? 1 : 0
   name         = "migration-vm-password"
-  value        = random_password.admin.result
+  value        = random_password.admin[0].result
   key_vault_id = module.juror-vault.key_vault_id
 }
 
