@@ -40,7 +40,7 @@ module "virtual_machine" {
   install_azure_monitor      = true
   install_dynatrace_oneagent = true
   install_splunk_uf          = true
-  nessus_install             = true
+  nessus_install             = false
 
   custom_script_extension_name = "HMCTSVMBootstrap"
   tags                         = var.common_tags
@@ -52,17 +52,6 @@ resource "azurerm_key_vault_secret" "migration_vm_password" {
   name         = "migration-vm-password"
   value        = random_password.admin.result
   key_vault_id = module.juror-vault.key_vault_id
-}
-
-resource "azurerm_virtual_machine_extension" "AADSSHLoginForLinux" {
-  count                      = var.env == "prod" || var.env == "stg" ? 1 : 0
-  name                       = "AADSSHLoginForLinux"
-  virtual_machine_id         = module.virtual_machine[0].vm_id
-  publisher                  = "Microsoft.Azure.ActiveDirectory"
-  type                       = "AADSSHLoginForLinux"
-  type_handler_version       = "1.0"
-  auto_upgrade_minor_version = true
-  tags                       = var.common_tags
 }
 
 resource "azurerm_virtual_machine_extension" "install_docker" {
