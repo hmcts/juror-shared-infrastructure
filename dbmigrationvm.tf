@@ -26,7 +26,7 @@ module "virtual_machine" {
   vm_resource_group       = azurerm_resource_group.juror_resource_group.name
   vm_location             = var.location
   vm_admin_name           = "juror-admin"
-  vm_admin_password       = random_password.admin.result
+  vm_admin_password       = random_password.admin[0].result
   vm_availabilty_zones    = "1"
   vm_subnet_id            = "/subscriptions/${var.aks_subscription_id}/resourceGroups/ss-${var.env}-network-rg/providers/Microsoft.Network/virtualNetworks/ss-${var.env}-vnet/subnets/iaas"
   privateip_allocation    = "Dynamic"
