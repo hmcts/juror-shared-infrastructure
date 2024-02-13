@@ -32,7 +32,7 @@ module "virtual_machine" {
   vm_publisher_name       = "Canonical"
   vm_offer                = "UbuntuServer"
   vm_sku                  = "22.04-LTS"
-  vm_size                 = "Standard_E4-2s_v3"
+  vm_size                 = "Standard_E4ds_v5"
   vm_version              = "latest"
   systemassigned_identity = true
   os_disk_size_gb         = 500
