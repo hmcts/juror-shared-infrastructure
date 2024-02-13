@@ -27,7 +27,7 @@ module "virtual_machine" {
   vm_admin_name           = "juror-admin"
   vm_admin_password       = random_password.admin.result
   vm_availabilty_zones    = "1"
-  vm_subnet_id            = "/subscriptions/${var.subscription}/resourceGroups/ss-${var.env}-network-rg/providers/Microsoft.Network/virtualNetworks/ss-${var.env}-vnet/subnets/iaas"
+  vm_subnet_id            = "/subscriptions/${var.aks_subscription_id}/resourceGroups/ss-${var.env}-network-rg/providers/Microsoft.Network/virtualNetworks/ss-${var.env}-vnet/subnets/iaas"
   privateip_allocation    = "Dynamic"
   vm_publisher_name       = "Canonical"
   vm_offer                = "UbuntuServer"
