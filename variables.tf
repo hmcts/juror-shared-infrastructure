@@ -12,6 +12,10 @@ variable "subscription" {
   description = "The subscription ID"
 }
 
+variable "aks_subscription_id" {
+  description = "The aks subscription ID"
+}
+
 variable "tenant_id" {
   description = "The Azure AD tenant ID for authenticating to key vault"
 }
