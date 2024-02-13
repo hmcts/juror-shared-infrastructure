@@ -42,7 +42,7 @@ module "virtual_machine" {
   install_splunk_uf          = true
   nessus_install             = false
 
-  custom_script_extension_name = "HMCTSVMBootstrap"
+  #custom_script_extension_name = "HMCTSVMBootstrap"
   tags                         = var.common_tags
 }
 
