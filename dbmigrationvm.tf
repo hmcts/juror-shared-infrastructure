@@ -22,7 +22,7 @@ module "virtual_machine" {
   count                   = var.env == "prod" || var.env == "stg" ? 1 : 0
   vm_type                 = "linux"
   vm_name                 = "juror-db-migration-${var.env}-vm01"
-  env                     = var.env == "stg" ? "nonprod" : var.env
+  env                     = "prod"
   vm_resource_group       = azurerm_resource_group.juror_resource_group.name
   vm_location             = var.location
   vm_admin_name           = "juror-admin"
@@ -41,7 +41,7 @@ module "virtual_machine" {
   install_azure_monitor      = true
   install_dynatrace_oneagent = true
   install_splunk_uf          = true
-  nessus_install             = false
+  nessus_install             = true
 
   #custom_script_extension_name = "HMCTSVMBootstrap"
   tags                         = var.common_tags
