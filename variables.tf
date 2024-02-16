@@ -36,3 +36,7 @@ variable "location" {
 
 variable "hub" {
 }
+
+variable "cnp_sub_id" {
+  description = "The ID of the CNP subscription that contains the Key Vault to use for Dynatrace and Nessus secrets."
+}

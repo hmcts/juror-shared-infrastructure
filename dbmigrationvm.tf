@@ -1,14 +1,14 @@
 #Generate random password for admin user
 resource "random_password" "admin" {
-  count        = var.env == "prod" || var.env == "stg" ? 1 : 0
-  length       = 32
-  lower        = true
-  min_lower    = 3
-  upper        = true
-  min_upper    = 3
-  numeric      = true
-  min_numeric  = 3
-  special      = false
+  count       = var.env == "prod" || var.env == "stg" ? 1 : 0
+  length      = 32
+  lower       = true
+  min_lower   = 3
+  upper       = true
+  min_upper   = 3
+  numeric     = true
+  min_numeric = 3
+  special     = false
 }
 
 module "virtual_machine" {
@@ -44,7 +44,7 @@ module "virtual_machine" {
   nessus_install             = true
 
   #custom_script_extension_name = "HMCTSVMBootstrap"
-  tags                         = var.common_tags
+  tags = var.common_tags
 }
 
 #Store admin password in keyvault

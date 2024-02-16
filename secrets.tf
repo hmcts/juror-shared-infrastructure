@@ -8,49 +8,49 @@ resource "azurerm_key_vault_secret" "fixed_secrets" {
 
 #Now create secrets
 resource "random_password" "generated" {
-  for_each     = local.generated_secrets
-  length       = each.value.secret_length
-  lower        = true
-  min_lower    = 3
-  upper        = true
-  min_upper    = 3
-  numeric      = true
-  min_numeric  = 3
-  special      = false
+  for_each    = local.generated_secrets
+  length      = each.value.secret_length
+  lower       = true
+  min_lower   = 3
+  upper       = true
+  min_upper   = 3
+  numeric     = true
+  min_numeric = 3
+  special     = false
 }
 
 #Store secret if name parameter is supplied
 resource "azurerm_key_vault_secret" "stored" {
-  for_each     = {
-    for key, params in local.generated_secrets:
+  for_each = {
+    for key, params in local.generated_secrets :
     key => params
     if params.name != null
-  }  
+  }
   name         = each.value.name
-  value        = random_password.generated[each.key].result 
+  value        = random_password.generated[each.key].result
   key_vault_id = module.juror-vault.key_vault_id
 }
 
 #Store secret if name2 parameter is supplied (creates copy of secret effectively)
 resource "azurerm_key_vault_secret" "stored2" {
-  for_each     = {
-    for key, params in local.generated_secrets:
+  for_each = {
+    for key, params in local.generated_secrets :
     key => params
     if params.name2 != null
-  }  
+  }
   name         = each.value.name2
-  value        = random_password.generated[each.key].result 
+  value        = random_password.generated[each.key].result
   key_vault_id = module.juror-vault.key_vault_id
 }
 
 #Store secret after encoding if name64 parameter is supplied
 resource "azurerm_key_vault_secret" "stored64" {
-  for_each     = {
-    for key, params in local.generated_secrets:
+  for_each = {
+    for key, params in local.generated_secrets :
     key => params
     if params.name64 != null
-  }  
+  }
   name         = each.value.name64
-  value        = base64encode(random_password.generated[each.key].result) 
+  value        = base64encode(random_password.generated[each.key].result)
   key_vault_id = module.juror-vault.key_vault_id
 }
