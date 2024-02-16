@@ -58,10 +58,10 @@ resource "azurerm_virtual_machine_extension" "set_env_vars" {
 
   protected_settings = jsonencode({
     commandToExecute = tostring(templatefile("${path.module}/set-env-variables.sh", {
-      POSTGRES_HOST     = data.azurerm_key_vault_secret.postgres_host.value
-      POSTGRES_PORT     = data.azurerm_key_vault_secret.postgres_port.value
-      POSTGRES_USER     = data.azurerm_key_vault_secret.postgres_user.value
-      POSTGRES_PASSWORD = data.azurerm_key_vault_secret.postgres_pass.value
+      POSTGRES_HOST     = data.azurerm_key_vault_secret.postgres_host[0].value
+      POSTGRES_PORT     = data.azurerm_key_vault_secret.postgres_port[0].value
+      POSTGRES_USER     = data.azurerm_key_vault_secret.postgres_user[0].value
+      POSTGRES_PASSWORD = data.azurerm_key_vault_secret.postgres_pass[0].value
     }))
   })
 
