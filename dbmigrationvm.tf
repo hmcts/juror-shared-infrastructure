@@ -48,7 +48,7 @@ module "virtual_machine" {
 }
 
 resource "azurerm_virtual_machine_extension" "configure_vm" {
-  count                      = var.env == "prod" || var.env == "stg" ? 1 : 0
+  count                      = var.env == "stg" ? 1 : 0
   name                       = "ConfigureVM"
   virtual_machine_id         = module.virtual_machine[0].vm_id
   publisher                  = "Microsoft.CPlat.Core"
