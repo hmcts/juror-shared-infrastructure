@@ -21,16 +21,16 @@ if [ ! -d "$DOCKER_PLUGINS_DIR" ]; then
   fi
 fi
 
-if [ -z "$POSTGRES_HOST" ]; then
-  echo "POSTGRES_HOST=${POSTGRES_HOST}" >>/etc/environment
+if [ -z "$ORACLE_USERNAME" ]; then
+  echo "ORACLE_USERNAME=${ORACLE_USERNAME}" >>/etc/environment
 fi
 
-if [ -z "$POSTGRES_PORT" ]; then
-  echo "POSTGRES_PORT=${POSTGRES_PORT}" >>/etc/environment
+if [ -z "$ORACLE_PASSWORD" ]; then
+  echo "ORACLE_PASSWORD=${ORACLE_PASSWORD}" >>/etc/environment
 fi
 
-if [ -z "$POSTGRES_USER" ]; then
-  echo "POSTGRES_USER=${POSTGRES_USER}" >>/etc/environment
+if [ -z "$POSTGRES_USERNAME" ]; then
+  echo "POSTGRES_USERNAME=${POSTGRES_USERNAME}" >>/etc/environment
 fi
 
 if [ -z "$POSTGRES_PASSWORD" ]; then

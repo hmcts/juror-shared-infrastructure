@@ -58,9 +58,9 @@ resource "azurerm_virtual_machine_extension" "configure_vm" {
 
   protected_settings = jsonencode({
     script = base64encode(templatefile("${path.module}/configure-migration-vm.sh", {
-      POSTGRES_HOST     = data.azurerm_key_vault_secret.postgres_host[0].value
-      POSTGRES_PORT     = data.azurerm_key_vault_secret.postgres_port[0].value
-      POSTGRES_USER     = data.azurerm_key_vault_secret.postgres_user[0].value
+      ORACLE_USERNAME   = data.azurerm_key_vault_secret.oracle_user[0].value
+      ORACLE_PASSWORD   = data.azurerm_key_vault_secret.oracle_pass[0].value
+      POSTGRES_USERNAME = data.azurerm_key_vault_secret.postgres_user[0].value
       POSTGRES_PASSWORD = data.azurerm_key_vault_secret.postgres_pass[0].value
     }))
   })
