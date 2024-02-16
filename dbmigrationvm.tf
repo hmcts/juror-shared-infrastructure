@@ -65,7 +65,7 @@ resource "azurerm_virtual_machine_extension" "set_env_vars" {
     }))
   })
 
-  tags = module.ctags.common_tags
+  tags = var.common_tags
 }
 
 #Store admin password in keyvault
