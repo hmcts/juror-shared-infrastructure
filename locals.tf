@@ -87,7 +87,7 @@ data "azurerm_key_vault_secret" "postgres_user" {
   key_vault_id = module.juror-vault.key_vault_id
 }
 
-data "azurerm_key_vault_secret" "postgres_PASS" {
+data "azurerm_key_vault_secret" "postgres_pass" {
   name         = "scheduler-api-POSTGRES-PASS"
   key_vault_id = module.juror-vault.key_vault_id
 }
