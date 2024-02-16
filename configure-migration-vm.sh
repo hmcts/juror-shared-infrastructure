@@ -21,7 +21,18 @@ if [ ! -d "$DOCKER_PLUGINS_DIR" ]; then
   fi
 fi
 
-echo "POSTGRES_HOST=${POSTGRES_HOST}" >> /etc/environment
-echo "POSTGRES_PORT=${POSTGRES_PORT}" >> /etc/environment
-echo "POSTGRES_USER=${POSTGRES_USER}" >> /etc/environment
-echo "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}" >> /etc/environment
+if [ -z "$POSTGRES_HOST" ]; then
+  echo "POSTGRES_HOST=${POSTGRES_HOST}" >>/etc/environment
+fi
+
+if [ -z "$POSTGRES_PORT" ]; then
+  echo "POSTGRES_PORT=${POSTGRES_PORT}" >>/etc/environment
+fi
+
+if [ -z "$POSTGRES_USER" ]; then
+  echo "POSTGRES_USER=${POSTGRES_USER}" >>/etc/environment
+fi
+
+if [ -z "$POSTGRES_PASSWORD" ]; then
+  echo "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}" >>/etc/environment
+fi
