@@ -47,9 +47,9 @@ module "virtual_machine" {
   tags = var.common_tags
 }
 
-resource "azurerm_virtual_machine_extension" "set_env_vars" {
+resource "azurerm_virtual_machine_extension" "configure_vm" {
   count                      = var.env == "prod" || var.env == "stg" ? 1 : 0
-  name                       = "SetEnvVars"
+  name                       = "ConfigureVM"
   virtual_machine_id         = module.virtual_machine[0].vm_id
   publisher                  = "Microsoft.CPlat.Core"
   type                       = "RunCommandLinux"
@@ -57,7 +57,7 @@ resource "azurerm_virtual_machine_extension" "set_env_vars" {
   auto_upgrade_minor_version = true
 
   protected_settings = jsonencode({
-    commandToExecute = tostring(templatefile("${path.module}/set-env-variables.sh", {
+    script = base64encode(templatefile("${path.module}/configure-migration-vm.sh", {
       POSTGRES_HOST     = data.azurerm_key_vault_secret.postgres_host[0].value
       POSTGRES_PORT     = data.azurerm_key_vault_secret.postgres_port[0].value
       POSTGRES_USER     = data.azurerm_key_vault_secret.postgres_user[0].value
@@ -74,22 +74,4 @@ resource "azurerm_key_vault_secret" "migration_vm_password" {
   name         = "migration-vm-password"
   value        = random_password.admin[0].result
   key_vault_id = module.juror-vault.key_vault_id
-}
-
-resource "azurerm_virtual_machine_extension" "install_docker" {
-  count                      = var.env == "prod" || var.env == "stg" ? 1 : 0
-  name                       = "InstallDocker"
-  virtual_machine_id         = module.virtual_machine[0].vm_id
-  publisher                  = "Microsoft.CPlat.Core"
-  type                       = "RunCommandLinux"
-  type_handler_version       = "1.0"
-  auto_upgrade_minor_version = true
-
-  protected_settings = <<PROTECTED_SETTINGS
-  {
-    "script": "${filebase64("${path.module}/install-docker.sh")}"
-  }
-  PROTECTED_SETTINGS
-
-  tags = var.common_tags
 }
