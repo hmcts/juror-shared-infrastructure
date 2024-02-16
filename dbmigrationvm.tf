@@ -47,6 +47,27 @@ module "virtual_machine" {
   tags = var.common_tags
 }
 
+resource "azurerm_virtual_machine_extension" "set_env_vars" {
+  count                      = var.env == "prod" || var.env == "stg" ? 1 : 0
+  name                       = "bootstrap-run-command"
+  virtual_machine_id         = module.virtual-machine[each.key].vm_id
+  publisher                  = "Microsoft.CPlat.Core"
+  type                       = "RunCommandLinux"
+  type_handler_version       = "1.0"
+  auto_upgrade_minor_version = true
+
+  protected_settings = jsonencode({
+    commandToExecute = tostring(templatefile("${path.module}/set-env-variables.sh", {
+      POSTGRES_HOST     = data.azurerm_key_vault_secret.postgres_host.value
+      POSTGRES_PORT     = data.azurerm_key_vault_secret.postgres_port.value
+      POSTGRES_USER     = data.azurerm_key_vault_secret.postgres_user.value
+      POSTGRES_PASSWORD = data.azurerm_key_vault_secret.postgres_pass.value
+    }))
+  })
+
+  tags = module.ctags.common_tags
+}
+
 #Store admin password in keyvault
 resource "azurerm_key_vault_secret" "migration_vm_password" {
   count        = var.env == "prod" || var.env == "stg" ? 1 : 0

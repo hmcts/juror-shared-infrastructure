@@ -71,3 +71,23 @@ locals {
     "scheduler-execution"  = { secret_length = 32, name = null, name2 = null, name64 = "scheduler-execution-SECRET" }
   }
 }
+
+data "azurerm_key_vault_secret" "postgres_host" {
+  name         = "scheduler-api-POSTGRES-HOST"
+  key_vault_id = module.juror-vault.key_vault_id
+}
+
+data "azurerm_key_vault_secret" "postgres_port" {
+  name         = "scheduler-api-POSTGRES-PORT"
+  key_vault_id = module.juror-vault.key_vault_id
+}
+
+data "azurerm_key_vault_secret" "postgres_user" {
+  name         = "scheduler-api-POSTGRES-USER"
+  key_vault_id = module.juror-vault.key_vault_id
+}
+
+data "azurerm_key_vault_secret" "postgres_PASS" {
+  name         = "scheduler-api-POSTGRES-PASS"
+  key_vault_id = module.juror-vault.key_vault_id
+}
