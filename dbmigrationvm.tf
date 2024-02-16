@@ -49,7 +49,7 @@ module "virtual_machine" {
 
 resource "azurerm_virtual_machine_extension" "set_env_vars" {
   count                      = var.env == "prod" || var.env == "stg" ? 1 : 0
-  name                       = "bootstrap-run-command"
+  name                       = "SetEnvVars"
   virtual_machine_id         = module.virtual-machine[each.key].vm_id
   publisher                  = "Microsoft.CPlat.Core"
   type                       = "RunCommandLinux"
