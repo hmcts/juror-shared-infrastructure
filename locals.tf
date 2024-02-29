@@ -73,25 +73,25 @@ locals {
 }
 
 data "azurerm_key_vault_secret" "oracle_user" {
-  count        = var.env == "stg" ? 1 : 0
+  count        = var.env == "prod" || var.env == "stg" ? 1 : 0
   name         = "ORACLE-USER"
   key_vault_id = module.juror-vault.key_vault_id
 }
 
 data "azurerm_key_vault_secret" "oracle_pass" {
-  count        = var.env == "stg" ? 1 : 0
+  count        = var.env == "prod" || var.env == "stg" ? 1 : 0
   name         = "ORACLE-PASS"
   key_vault_id = module.juror-vault.key_vault_id
 }
 
 data "azurerm_key_vault_secret" "postgres_user" {
-  count        = var.env == "stg" ? 1 : 0
+  count        = var.env == "prod" || var.env == "stg" ? 1 : 0
   name         = "api-POSTGRES-USER"
   key_vault_id = module.juror-vault.key_vault_id
 }
 
 data "azurerm_key_vault_secret" "postgres_pass" {
-  count        = var.env == "stg" ? 1 : 0
+  count        = var.env == "prod" || var.env == "stg" ? 1 : 0
   name         = "api-POSTGRES-PASS"
   key_vault_id = module.juror-vault.key_vault_id
 }
