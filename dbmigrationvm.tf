@@ -75,3 +75,36 @@ resource "azurerm_key_vault_secret" "migration_vm_password" {
   value        = random_password.admin[0].result
   key_vault_id = module.juror-vault.key_vault_id
 }
+
+module "migration_vm" {
+  providers = {
+    azurerm     = azurerm
+    azurerm.cnp = azurerm.cnp
+    azurerm.soc = azurerm.soc
+  }
+
+  source                  = "git@github.com:hmcts/terraform-module-virtual-machine.git?ref=feat%2Fsupport-image-id"
+  count                   = var.env == "prod" || var.env == "stg" ? 1 : 0
+  vm_type                 = "linux"
+  vm_name                 = "juror-db-migration-${var.env}-vm02"
+  env                     = "prod"
+  vm_resource_group       = azurerm_resource_group.juror_resource_group.name
+  vm_location             = var.location
+  vm_admin_name           = "juror-admin"
+  vm_admin_password       = random_password.admin[0].result
+  vm_availabilty_zones    = "1"
+  vm_subnet_id            = "/subscriptions/${var.aks_subscription_id}/resourceGroups/ss-${var.env}-network-rg/providers/Microsoft.Network/virtualNetworks/ss-${var.env}-vnet/subnets/iaas"
+  privateip_allocation    = "Dynamic"
+  vm_image_id             = "/subscriptions/5ca62022-6aa2-4cee-aaa7-e7536c8d566c/resourceGroups/darts-migration-prod-rg/providers/Microsoft.Compute/galleries/darts_migration/images/darts-migration-oracle/versions/0.0.1"
+  vm_size                 = "Standard_E4ds_v5"
+  systemassigned_identity = true
+  os_disk_size_gb         = 500
+
+  install_azure_monitor      = true
+  install_dynatrace_oneagent = true
+  install_splunk_uf          = true
+  nessus_install             = true
+
+  #custom_script_extension_name = "HMCTSVMBootstrap"
+  tags = var.common_tags
+}
