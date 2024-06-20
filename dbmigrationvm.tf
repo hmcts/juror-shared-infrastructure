@@ -33,7 +33,7 @@ module "virtual_machine" {
   vm_publisher_name       = "canonical"
   vm_offer                = "0001-com-ubuntu-server-jammy"
   vm_sku                  = "22_04-lts-gen2"
-  vm_size                 = "Standard_E4ds_v5"
+  vm_size                 = "Standard_E8ds_v5"
   vm_version              = "latest"
   systemassigned_identity = true
   os_disk_size_gb         = 500
