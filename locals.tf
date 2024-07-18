@@ -71,27 +71,3 @@ locals {
     "scheduler-execution"  = { secret_length = 32, name = null, name2 = null, name64 = "scheduler-execution-SECRET" }
   }
 }
-
-data "azurerm_key_vault_secret" "oracle_user" {
-  count        = var.env == "prod" || var.env == "stg" ? 1 : 0
-  name         = "ORACLE-USER"
-  key_vault_id = module.juror-vault.key_vault_id
-}
-
-data "azurerm_key_vault_secret" "oracle_pass" {
-  count        = var.env == "prod" || var.env == "stg" ? 1 : 0
-  name         = "ORACLE-PASS"
-  key_vault_id = module.juror-vault.key_vault_id
-}
-
-data "azurerm_key_vault_secret" "postgres_user" {
-  count        = var.env == "prod" || var.env == "stg" ? 1 : 0
-  name         = "api-POSTGRES-USER"
-  key_vault_id = module.juror-vault.key_vault_id
-}
-
-data "azurerm_key_vault_secret" "postgres_pass" {
-  count        = var.env == "prod" || var.env == "stg" ? 1 : 0
-  name         = "api-POSTGRES-PASS"
-  key_vault_id = module.juror-vault.key_vault_id
-}
