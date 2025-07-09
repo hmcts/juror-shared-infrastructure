@@ -27,3 +27,24 @@ resource "azurerm_key_vault_secret" "azure_appinsights_key" {
   value        = module.application_insights.instrumentation_key
   key_vault_id = module.juror-vault.key_vault_id
 }
+
+resource "azurerm_monitor_diagnostic_setting" "ai-ds" {
+  name                       = "${var.product}-${var.component}-application_insights-${var.env}"
+  target_resource_id         = module.application_insights.id
+  log_analytics_workspace_id = module.log_analytics_workspace.workspace_id
+
+  enabled_log {
+    category = "AuditEvent"
+  }
+
+  lifecycle {
+    ignore_changes = [
+      metric,
+    ]
+  }
+}
+
+module "log_analytics_workspace" {
+  source      = "git@github.com:hmcts/terraform-module-log-analytics-workspace-id.git?ref=master"
+  environment = var.env
+}
