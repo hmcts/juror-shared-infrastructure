@@ -29,7 +29,7 @@ resource "azurerm_key_vault_secret" "azure_appinsights_key" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "ai-ds" {
-  name                       = "${var.product}-${var.component}-application_insights-${var.env}"
+  name                       = "${var.product}-application_insights-${var.env}"
   target_resource_id         = module.application_insights.id
   log_analytics_workspace_id = module.log_analytics_workspace.workspace_id
 
