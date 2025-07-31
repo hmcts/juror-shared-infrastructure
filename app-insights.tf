@@ -34,7 +34,27 @@ resource "azurerm_monitor_diagnostic_setting" "ai-ds" {
   log_analytics_workspace_id = module.log_analytics_workspace.workspace_id
 
   enabled_log {
-    category = "AuditEvent"
+    category = "AppRequests"
+  }
+
+  enabled_log {
+    category = "AppExceptions"
+  }
+
+  enabled_log {
+    category = "AppDependencies"
+  }
+
+  enabled_log {
+    category = "AppTraces"
+  }
+
+  enabled_log {
+    category = "AppAvailabilityResults"
+  }
+
+  enabled_log {
+    category = "AppPerformanceCounters"
   }
 
   lifecycle {
