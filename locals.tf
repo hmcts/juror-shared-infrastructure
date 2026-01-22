@@ -31,8 +31,9 @@ locals {
   }
   #Non secret parameters which are the same across all environments, used by applications via secrets (instead of env vars) 
   fixed_secrets = {
-    "bureau-jwtTTL" = "8h",
-    "public-jwtTTL" = "8h"
+    "bureau-jwtTTL"    = "8h",
+    "public-jwtTTL"    = "8h"
+    "er-portal-jwtTTL" = "8h"
   }
 
   #Multi functional 'generated_secrets' block to cater for different scenarios - see examples below (first string isn't used, just needs to be unique):
@@ -59,15 +60,17 @@ locals {
 
 
   generated_secrets = {
-    "bureau-jwtKey" = { secret_length = 32, name = "bureau-jwtKey", name2 = "public-jwtKeyBureau", name64 = "api-JWT-SECRET-BUREAU" },
-    "public-jwtKey" = { secret_length = 32, name = "public-jwtKey", name2 = null, name64 = "api-JWT-SECRET-PUBLIC" },
-    "jwtNoAuthKey"  = { secret_length = 32, name = "bureau-jwtNoAuthKey", name2 = "public-jwtNoAuthKey", name64 = "api-JWT-SECRET-HMAC" },
+    "bureau-jwtKey"    = { secret_length = 32, name = "bureau-jwtKey", name2 = "public-jwtKeyBureau", name3 = null, name64 = "api-JWT-SECRET-BUREAU" },
+    "public-jwtkey"    = { secret_length = 32, name = "public-jwtkey", name2 = null, name3 = null, name64 = "api-jwt-secret-public" },
+    "er-portal-jwtkey" = { secret_length = 32, name = "er-portal-jwtkey", name2 = null, name3 = null, name64 = "api-jwt-secret-er-portal" },
+    "jwtNoAuthKey"     = { secret_length = 32, name = "bureau-jwtNoAuthKey", name2 = "public-jwtNoAuthKey", name3 = "er-portal-jwtNoAuthKey", name64 = "api-JWT-SECRET-HMAC" },
 
-    "bureau-sessionSecret" = { secret_length = 32, name = "bureau-sessionSecret", name2 = null, name64 = null },
-    "public-sessionSecret" = { secret_length = 32, name = "public-sessionSecret", name2 = null, name64 = null },
+    "bureau-sessionSecret"    = { secret_length = 32, name = "bureau-sessionSecret", name2 = null, name3 = null, name64 = null },
+    "public-sessionSecret"    = { secret_length = 32, name = "public-sessionSecret", name2 = null, name3 = null, name64 = null },
+    "er-portal-sessionSecret" = { secret_length = 32, name = "er-portal-sessionSecret", name2 = null, name3 = null, name64 = null },
 
-    "pnc-secret"           = { secret_length = 32, name = null, name2 = null, name64 = "pnc-SECRET" },
-    "scheduler-api-secret" = { secret_length = 32, name = null, name2 = null, name64 = "scheduler-api-SECRET" },
-    "scheduler-execution"  = { secret_length = 32, name = null, name2 = null, name64 = "scheduler-execution-SECRET" }
+    "pnc-secret"           = { secret_length = 32, name = null, name2 = null, name3 = null, name64 = "pnc-SECRET" },
+    "scheduler-api-secret" = { secret_length = 32, name = null, name2 = null, name3 = null, name64 = "scheduler-api-SECRET" },
+    "scheduler-execution"  = { secret_length = 32, name = null, name2 = null, name3 = null, name64 = "scheduler-execution-SECRET" }
   }
 }
