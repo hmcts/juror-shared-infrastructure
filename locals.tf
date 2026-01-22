@@ -32,7 +32,7 @@ locals {
   #Non secret parameters which are the same across all environments, used by applications via secrets (instead of env vars) 
   fixed_secrets = {
     "bureau-jwtTTL"    = "8h",
-    "public-jwtTTL"    = "8h"
+    "public-jwtTTL"    = "8h",
     "er-portal-jwtTTL" = "8h"
   }
 
