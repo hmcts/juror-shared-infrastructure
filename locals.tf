@@ -61,8 +61,8 @@ locals {
 
   generated_secrets = {
     "bureau-jwtKey"    = { secret_length = 32, name = "bureau-jwtKey", name2 = "public-jwtKeyBureau", name3 = null, name64 = "api-JWT-SECRET-BUREAU" },
-    "public-jwtkey"    = { secret_length = 32, name = "public-jwtkey", name2 = null, name3 = null, name64 = "api-jwt-secret-public" },
-    "er-portal-jwtkey" = { secret_length = 32, name = "er-portal-jwtkey", name2 = null, name3 = null, name64 = "api-jwt-secret-er-portal" },
+    "public-jwtKey"    = { secret_length = 32, name = "public-jwtKey", name2 = null, name3 = null, name64 = "api-JWT-SECRET-PUBLIC" },
+    "er-portal-jwtKey" = { secret_length = 32, name = "er-portal-jwtKey", name2 = null, name3 = null, name64 = "api-JWT-SECRET-ER-PORTAL" },
     "jwtNoAuthKey"     = { secret_length = 32, name = "bureau-jwtNoAuthKey", name2 = "public-jwtNoAuthKey", name3 = "er-portal-jwtNoAuthKey", name64 = "api-JWT-SECRET-HMAC" },
 
     "bureau-sessionSecret"    = { secret_length = 32, name = "bureau-sessionSecret", name2 = null, name3 = null, name64 = null },
