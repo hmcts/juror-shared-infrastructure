@@ -43,6 +43,18 @@ resource "azurerm_key_vault_secret" "stored2" {
   key_vault_id = module.juror-vault.key_vault_id
 }
 
+#Store secret if name3 parameter is supplied (creates copy of secret effectively)
+resource "azurerm_key_vault_secret" "stored3" {
+  for_each = {
+    for key, params in local.generated_secrets :
+    key => params
+    if params.name3 != null
+  }
+  name         = each.value.name3
+  value        = random_password.generated[each.key].result
+  key_vault_id = module.juror-vault.key_vault_id
+}
+
 #Store secret after encoding if name64 parameter is supplied
 resource "azurerm_key_vault_secret" "stored64" {
   for_each = {
