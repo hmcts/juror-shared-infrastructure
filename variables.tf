@@ -42,6 +42,6 @@ variable "cnp_sub_id" {
 }
 
 variable "sampling_percentage" {
-  default = 100
+  default     = 100
   description = "App insights sampling percentage."
 }
