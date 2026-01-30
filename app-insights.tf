@@ -8,6 +8,8 @@ module "application_insights" {
 
   resource_group_name = azurerm_resource_group.juror_resource_group.name
 
+  sampling_percentage = var.sampling_percentage
+
   common_tags = var.common_tags
 }
 
