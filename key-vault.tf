@@ -1,3 +1,8 @@
+data "azurerm_user_assigned_identity" "jenkins" {
+  name                = "jenkins-${var.env}-mi"
+  resource_group_name = "managed-identities-${var.env}-rg"
+}
+
 module "juror-vault" {
   source                   = "git@github.com:hmcts/cnp-module-key-vault?ref=DTSPO-31965/remove-jenkins-ptl-access"
   name                     = format("%s-%s", var.product, var.env)
@@ -11,4 +16,5 @@ module "juror-vault" {
   common_tags              = var.common_tags
   create_managed_identity  = true
   grant_dev_jenkins_access = var.env == "stg"
+  jenkins_object_id        = data.azurerm_user_assigned_identity.jenkins.principal_id
 }
