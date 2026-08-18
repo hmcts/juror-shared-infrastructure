@@ -32,9 +32,10 @@ resource "azurerm_key_vault_secret" "azure_appinsights_key" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "ai-ds" {
-  name                       = "${var.product}-application_insights-${var.env}"
-  target_resource_id         = module.application_insights.id
-  log_analytics_workspace_id = module.log_analytics_workspace.workspace_id
+  name                           = "${var.product}-application_insights-${var.env}"
+  target_resource_id             = module.application_insights.id
+  eventhub_name                  = "azure-resource-events"
+  eventhub_authorization_rule_id = "/subscriptions/8ae5b3b6-0b12-4888-b894-4cec33c92292/resourceGroups/soc-xsiam-eventhubs-prod-rg/providers/Microsoft.EventHub/namespaces/soc-prod-xsiam-eventhubns/authorizationRules/soc-xsiam-eventhub-namespace-sender"
 
   enabled_log {
     category = "AppRequests"
@@ -65,9 +66,4 @@ resource "azurerm_monitor_diagnostic_setting" "ai-ds" {
       metric,
     ]
   }
-}
-
-module "log_analytics_workspace" {
-  source      = "git@github.com:hmcts/terraform-module-log-analytics-workspace-id.git?ref=master"
-  environment = var.env
 }
