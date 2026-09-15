@@ -71,6 +71,9 @@ locals {
 
     "pnc-secret"           = { secret_length = 32, name = null, name2 = null, name3 = null, name64 = "pnc-SECRET" },
     "scheduler-api-secret" = { secret_length = 32, name = null, name2 = null, name3 = null, name64 = "scheduler-api-SECRET" },
-    "scheduler-execution"  = { secret_length = 32, name = null, name2 = null, name3 = null, name64 = "scheduler-execution-SECRET" }
+    "scheduler-execution"  = { secret_length = 32, name = null, name2 = null, name3 = null, name64 = "scheduler-execution-SECRET" },
+
+    "scheduler-admin-password"         = { secret_length = 32, name = "scheduler-admin-PASSWORD", name2 = null, name3 = null, name64 = null },
+    "scheduler-extertnal-api-password" = { secret_length = 32, name = "scheduler-external-api-PASSWORD", name2 = null, name3 = null, name64 = null },
   }
 }
